@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <a href="/pages/" class="btn btn-outline-warning btn-sm mb-3">← Volver a Rutinas</a>
+        <div class="card p-4">
+            {% if routine.image %}
+            <img src="{{ routine.image.url }}" class="img-fluid rounded mb-4" style="max-height:400px; object-fit:cover; width:100%;">
+            {% endif %}
+            <span class="badge badge-cat mb-2">{{ routine.get_category_display }}</span>
+            <h1 style="color:#FFD600; font-weight:900;">{{ routine.title }}</h1>
+            <p style="color:#aaa;">📅 Publicado el {{ routine.created_at }}</p>
+            <hr style="border-color:#333;">
+            <div style="color:#ccc;">
+                {{ routine.description|safe }}
+            </div>
+            {% if user.is_authenticated %}
+            <div class="mt-4">
+                <a href="/pages/{{ routine.pk }}/update/" class="btn btn-outline-warning me-2">Editar</a>
+                <a href="/pages/{{ routine.pk }}/delete/" class="btn btn-outline-danger">Borrar</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <a href="/messenger/" class="btn btn-outline-warning btn-sm mb-3">← Volver a mensajes</a>
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 style="color:#FFD600;">Mensaje de {{ message.sender.username }}</h4>
+                <small style="color:#aaa;">{{ message.created_at|date:"d/m/Y H:i" }}</small>
+            </div>
+            <hr style="border-color:#333;">
+            <p style="color:#ccc; font-size:1.1rem;">{{ message.content }}</p>
+            <div class="mt-4">
+                <a href="/messenger/send/" class="btn btn-amarillo">Responder</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4">
+            <h2 class="titulo-seccion text-center mb-4">Ingresar</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label" style="color:#FFD600;">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <div style="color:red; font-size:0.85rem;">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-amarillo w-100">Ingresar</button>
+            </form>
+            <p class="text-center mt-3" style="color:#aaa;">
+                ¿No tenés cuenta? <a href="/accounts/register/">Registrate acá</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

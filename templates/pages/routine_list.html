@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="titulo-seccion">Rutinas</h1>
+    {% if user.is_authenticated %}
+    <a href="/pages/create/" class="btn btn-amarillo">+ Nueva Rutina</a>
+    {% endif %}
+</div>
+
+<form method="GET" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Buscar rutina..." value="{{ request.GET.q }}">
+        <button class="btn btn-amarillo" type="submit">Buscar</button>
+    </div>
+</form>
+
+{% if routines %}
+<div class="row">
+    {% for routine in routines %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            {% if routine.image %}
+            <img src="{{ routine.image.url }}" class="card-img-top" style="height:200px; object-fit:cover;">
+            {% endif %}
+            <div class="card-body">
+                <span class="badge badge-cat mb-2">{{ routine.get_category_display }}</span>
+                <h5 class="card-title" style="color:#FFD600;">{{ routine.title }}</h5>
+                <p style="color:#aaa; font-size:0.85rem;">📅 {{ routine.created_at }}</p>
+                <a href="/pages/{{ routine.pk }}/" class="btn btn-amarillo btn-sm">Leer más</a>
+                {% if user.is_authenticated %}
+                <a href="/pages/{{ routine.pk }}/update/" class="btn btn-outline-warning btn-sm">Editar</a>
+                <a href="/pages/{{ routine.pk }}/delete/" class="btn btn-outline-danger btn-sm">Borrar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5">
+    <p style="color:#aaa; font-size:1.2rem;">No hay rutinas aún. ¡Sé el primero en cargar una!</p>
+    {% if user.is_authenticated %}
+    <a href="/pages/create/" class="btn btn-amarillo">+ Crear Rutina</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

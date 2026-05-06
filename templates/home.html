@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="titulo-seccion" style="font-size: 3rem;">💪 rutinas.hurlingham</h1>
+    <p class="lead mt-3" style="color: #ccc; font-size: 1.2rem;">
+        Tu espacio para entrenar con propósito. Rutinas, técnica y resultados reales.
+    </p>
+    <div class="mt-4">
+        <a href="/pages/" class="btn btn-amarillo btn-lg me-3">Ver Rutinas</a>
+        {% if not user.is_authenticated %}
+        <a href="/accounts/register/" class="btn btn-outline-warning btn-lg">Unirse</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-5 text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card p-4">
+            <h2 style="color:#FFD600; font-size: 2.5rem;">🏋️</h2>
+            <h5 class="titulo-seccion">Rutinas</h5>
+            <p style="color:#aaa;">Ejercicios detallados para todos los niveles.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card p-4">
+            <h2 style="color:#FFD600; font-size: 2.5rem;">📋</h2>
+            <h5 class="titulo-seccion">Técnica</h5>
+            <p style="color:#aaa;">Aprendé a ejecutar cada movimiento correctamente.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card p-4">
+            <h2 style="color:#FFD600; font-size: 2.5rem;">🤝</h2>
+            <h5 class="titulo-seccion">Comunidad</h5>
+            <p style="color:#aaa;">Conectate con otros atletas del barrio.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

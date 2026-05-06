@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="titulo-seccion">Bandeja de entrada</h1>
+    <a href="/messenger/send/" class="btn btn-amarillo">+ Nuevo mensaje</a>
+</div>
+
+{% if messages %}
+<div class="list-group">
+    {% for message in messages %}
+    <a href="/messenger/{{ message.pk }}/" class="list-group-item list-group-item-action mb-2" 
+       style="background-color:#1a1a1a; border:1px solid #333; color:#f0f0f0;">
+        <div class="d-flex justify-content-between">
+            <strong style="color:#FFD600;">{{ message.sender.username }}</strong>
+            <small style="color:#aaa;">{{ message.created_at|date:"d/m/Y H:i" }}</small>
+        </div>
+        <p class="mb-0 mt-1" style="color:#ccc;">{{ message.content|truncatechars:80 }}</p>
+        {% if not message.is_read %}
+        <span class="badge badge-cat mt-1">Nuevo</span>
+        {% endif %}
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5">
+    <p style="color:#aaa; font-size:1.2rem;">No tenés mensajes aún.</p>
+    <a href="/messenger/send/" class="btn btn-amarillo">Enviar un mensaje</a>
+</div>
+{% endif %}
+{% endblock %}
